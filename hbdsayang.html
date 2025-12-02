@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Happy Birthday! </title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+:root{
+  --accent:#FF9BB4;
+  --muted:#777;
+  --card-bg: #ffffff;
+  --overlay: rgba(0,0,0,0.65);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:'Poppins',sans-serif;
+  background: linear-gradient(-45deg,#ee7752,#e73c7e,#23a6d5,#23d5ab);
+  background-size:400% 400%;
+  animation: gradientBG 15s ease infinite;
+  min-height:100vh;
+  color:#222;
+  -webkit-font-smoothing:antialiased;
+}
+@keyframes gradientBG{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+.container{
+  max-width:900px;
+  margin:32px auto;
+  padding:28px;
+  text-align:center;
+}
+h1{
+  font-family:'Dancing Script',cursive;
+  font-size:2.6rem;
+  color:#fff;
+  text-shadow:0 3px 6px rgba(0,0,0,0.25);
+}
+.date-badge{
+  display:inline-block;
+  margin:12px 0 28px;
+  background:rgba(255,255,255,0.18);
+  padding:8px 18px;
+  color:#fff;
+  border-radius:20px;
+  border:1px solid rgba(255,255,255,0.24);
+  backdrop-filter: blur(4px);
+}
+
+.gallery{
+  display:flex;
+  justify-content:center;
+  gap:16px;
+  flex-wrap:wrap;
+  margin-bottom:26px;
+}
+.polaroid{
+  width:190px;
+  background:var(--card-bg);
+  padding:10px 10px 36px;
+  box-shadow:0 12px 30px rgba(0,0,0,0.18);
+  transform:rotate(-3deg);
+  transition:transform .22s ease;
+  cursor:pointer;
+  border-radius:8px;
+}
+.polaroid:nth-child(even){ transform: rotate(3deg); }
+.polaroid:hover{ transform:scale(1.06) rotate(0); z-index:5; }
+.polaroid img{ width:100%; height:140px; object-fit:cover; border-radius:6px; display:block; margin-bottom:10px; }
+.polaroid .caption{ color:var(--muted); font-size:0.95rem; }
+
+.card{
+  background: rgba(255,255,255,0.95);
+  padding:28px;
+  border-radius:16px;
+  box-shadow:0 18px 45px rgba(0,0,0,0.18);
+  max-width:840px;
+  margin: 10px auto;
+  text-align:left;
+}
+.card p{ color:#444; line-height:1.6; font-size:1rem }
+
+.heart-icon{ color:var(--accent); font-size:1.6rem; display:inline-block; animation:beat 1s infinite; margin-left:8px }
+@keyframes beat{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+
+/* music control */
+.music-control{
+  position:fixed; right:18px; bottom:18px;
+  width:52px; height:52px; border-radius:50%;
+  background:#fff; display:flex; align-items:center; justify-content:center;
+  box-shadow:0 8px 24px rgba(0,0,0,0.18); cursor:pointer; z-index:2000;
+}
+
+/* modal (card style) */
+.modal{
+  position:fixed; inset:0; display:none; justify-content:center; align-items:center;
+  background:var(--overlay); z-index:1500; padding:18px;
+}
+.modal.show{ display:flex; }
+.modal-card{
+  width:100%; max-width:900px; background:var(--card-bg); border-radius:12px;
+  overflow:hidden; position:relative; box-shadow:0 20px 60px rgba(0,0,0,0.35);
+}
+
+/* close button (white circle) */
+.modal-close{
+  position:absolute; top:14px; right:14px; z-index:10;
+  width:40px; height:40px; border-radius:50%; background:var(--accent);
+  color:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:20px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.2);
+}
+
+/* slider inside modal */
+.modal-slider{ width:100%; height:420px; position:relative; background:#00000010; }
+.modal-slide{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity .6s ease;
+}
+.modal-slide.active{ opacity:1; }
+
+/* modal content text */
+.modal-body{ padding:22px; text-align:left; }
+.modal-body h2{ font-family:'Dancing Script'; color:var(--accent); font-size:2rem; margin-bottom:6px; }
+.modal-body p{ color:#444; line-height:1.6; font-size:1rem; margin-bottom:6px; }
+
+/* responsive */
+@media (max-width:640px){
+  .modal-slider{ height:300px; }
+  .polaroid{ width:44%; }
+  h1{ font-size:2rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Happy Birthday! & Happy Anniversary ❤️</h1>
+  <h1>Nindhita Trisna Putri</h1>
+  <div class="date-badge"><i class="far fa-calendar-alt"></i> 2 Desember / 25 April 2025</div>
+
+  <div class="gallery">
+    <!-- FIRST -->
+    <div class="polaroid" data-popup="first">
+      <img src="foto/first4.jpeg" alt="First">
+      <div class="caption">First ❤️</div>
+    </div>
+
+    <!-- PHOTOBOX -->
+    <div class="polaroid" data-popup="photobox">
+      <img src="foto/pbox2.2.jpeg" alt="Photobox">
+      <div class="caption">Photobox</div>
+    </div>
+
+    <!-- ANNIVERSARY -->
+    <div class="polaroid" data-popup="aniv">
+      <img src="foto/aniv1.jpeg" alt="Anniversary">
+      <div class="caption">Aniversary</div>
+    </div>
+
+    <!-- KOPKEN -->
+    <div class="polaroid" data-popup="kopken">
+      <img src="foto/kopken2.jpeg" alt="Kopken">
+      <div class="caption">Kopken & Studi Date</div>
+    </div>
+
+    <!-- NYORE -->
+    <div class="polaroid" data-popup="nyore">
+      <img src="foto/nyore1.jpeg" alt="Nyore">
+      <div class="caption">Nyore Date</div>
+    </div>
+
+    <div class="polaroid" data-popup="random">
+      <img src="foto/umkt.jpeg" alt="random">
+      <div class="caption">random</div>
+    </div>
+
+  </div>
+
+  <div class="card">
+    <p>
+      Selamat ulang tahun Sayanggkuu Cintaakuu Cantikkuuu dan happy Anniversary Sayangg ! 🎉<br><br>
+      Semoga semua kebahagiaan, tawa, dan impian terindah datang menghampirimu. Terima kasih sudah menjadi sosok yang luar biasa kuatnyaa
+      abangg selalu bangga atas semua pencapaian adekk sayangg,Ayo Kita Tumbuh Bersama Sayanggg,I LOVEE UUU SAYANGGKUUUU.
+    </p>
+    <div style="margin-top:12px; text-align:center;">
+      <span class="heart-icon"><i class="fas fa-heart"></i></span>
+    </div>
+  </div>
+
+  <p style="text-align:center; color:#fff; margin-top:18px;">Dibuat dengan ❤️ khusus untukmu</p>
+</div>
+
+<!-- Audio -->
+<audio id="bgMusic" loop>
+  <source src="bergema2.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Music toggle -->
+<div class="music-control" id="musicBtn" title="Toggle music">
+  <i class="fas fa-volume-up" id="musicIcon"></i>
+</div>
+
+<!-- POPUPS -->
+<!-- FIRST popup -->
+<div class="modal" id="modal-first" aria-hidden="true">
+  <div class="modal-card" role="dialog" aria-modal="true">
+    <div class="modal-close" data-close="first">✖</div>
+    <div class="modal-slider" data-slider="first">
+      <img class="modal-slide active" src="foto/first.jpeg" alt="">
+      <img class="modal-slide" src="foto/first4.jpeg" alt="">
+      <img class="modal-slide" src="foto/first2.jpeg" alt="">
+      <img class="modal-slide" src="foto/first3.jpeg" alt="">
+      <img class="modal-slide" src="foto/first5.jpeg" alt="">
+    </div>
+    <div class="modal-body">
+      <h2>Moment Taken Bidadari Melak</h2>
+      <p>Ini Moment gabisa abang lupainn Moment abang taken adek wkwk butuh mental dan kesiapan yang sangat kuat ini wkwk, terimakasih udah mau menerima orang gilaa ini yaa sayang wkwk</p>
+    </div>
+  </div>
+</div>
+
+<!-- PHOTOBOX popup -->
+<div class="modal" id="modal-photobox" aria-hidden="true">
+  <div class="modal-card" role="dialog" aria-modal="true">
+    <div class="modal-close" data-close="photobox">✖</div>
+    <div class="modal-slider" data-slider="photobox">
+      <img class="modal-slide active" src="foto/pbox4.jpeg" alt="">
+      <img class="modal-slide" src="foto/pbox1.jpeg" alt="">
+      <img class="modal-slide" src="foto/pbox2.jpeg" alt="">
+      <img class="modal-slide" src="foto/pbox3.jpeg" alt="">
+      <img class="modal-slide" src="foto/pbox5.jpeg" alt="">
+      <img class="modal-slide" src="foto/pbox6.jpeg" alt="">
+      <img class="modal-slide" src="foto/pboxaniv.jpeg" alt="">
+    </div>
+    <div class="modal-body">
+      <h2>PHOTOBOX</h2>
+      <p>Terimakasihh Sayang Udah Ajak Abang buat Photobox Pertama kali Sama Adek, Banyak Hal Baru yang abang rasain bersama adek, mengabadikan moment ternyata itu sangat penting sayang.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ANNIVERSARY popup -->
+<div class="modal" id="modal-aniv" aria-hidden="true">
+  <div class="modal-card" role="dialog" aria-modal="true">
+    <div class="modal-close" data-close="aniv">✖</div>
+    <div class="modal-slider" data-slider="aniv">
+      <img class="modal-slide active" src="foto/aniv1.jpeg" alt="">
+      <img class="modal-slide" src="foto/aniv2.jpeg" alt="">
+      <img class="modal-slide" src="foto/aniv3.jpeg" alt="">
+      <img class="modal-slide" src="foto/aniv4.jpeg" alt="">
+      <img class="modal-slide" src="foto/aniv.jpeg" alt="">
+      <img class="modal-slide" src="foto/pboxaniv.jpeg" alt="">
+      <img class="modal-slide" src="foto/taken2.jpeg" alt="">
+    </div>
+    <div class="modal-body">
+      <h2>ANIVERSARY</h2>
+      <p>Moment perayaan aniv kitaa sayangg, kita sebelum aniv pasti ada tantrumnya yaaa wkwk, tapi semua kita lewatin dan kita rayakan sayangg ini jadi bukti perjuangankita bersama sayanggg.</p>
+    </div>
+  </div>
+</div>
+
+<!-- KOPKEN popup -->
+<div class="modal" id="modal-kopken" aria-hidden="true">
+  <div class="modal-card" role="dialog" aria-modal="true">
+    <div class="modal-close" data-close="kopken">✖</div>
+    <div class="modal-slider" data-slider="kopken">
+      <img class="modal-slide active" src="foto/kopken1.jpeg" alt="">
+      <img class="modal-slide" src="foto/kopken2.jpeg" alt="">
+      <img class="modal-slide" src="foto/kopken3.jpeg" alt="">
+      <img class="modal-slide" src="foto/kopken5.jpeg" alt="">
+      <img class="modal-slide" src="foto/kopken6.jpeg" alt="">
+    </div>
+    <div class="modal-body">
+      <h2>Kopken & Studi Date</h2>
+      <p>Tempat Belajar, Gosip, Main, dan Berteduh Paling Enak Adalah Kopken. Selain belajar dulu kita juga suka main kutek sayangg wkwk.</p>
+    </div>
+  </div>
+</div>
+
+<!-- NYORE popup -->
+<div class="modal" id="modal-nyore" aria-hidden="true">
+  <div class="modal-card" role="dialog" aria-modal="true">
+    <div class="modal-close" data-close="nyore">✖</div>
+    <div class="modal-slider" data-slider="nyore">
+      <img class="modal-slide active" src="foto/nyore1.jpeg" alt="">
+      <img class="modal-slide" src="foto/nyore2.jpeg" alt="">
+      <img class="modal-slide" src="foto/nyore3.jpeg" alt="">
+      <img class="modal-slide" src="foto/nyore.jpeg" alt="">
+      <img class="modal-slide" src="foto/nyore4.jpeg" alt="">
+      <img class="modal-slide" src="foto/nyore5.jpeg" alt="">
+    </div>
+    <div class="modal-body">
+      <h2>Nyore</h2>
+      <p>Abang Suka Senja Apalagi Bareng adek — Senja + Adek beuhh paket komplit, Senja aja indah apalagi pacar abangg yang cantik dari Melakk nii wkwk.</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="modal-random" aria-hidden="true">
+  <div class="modal-card" role="dialog" aria-modal="true">
+    <div class="modal-close" data-close="random">✖</div>
+    <div class="modal-slider" data-slider="random">
+      <img class="modal-slide active" src="foto/umkt.jpeg" alt="">
+      <img class="modal-slide" src="foto/nonton.jpeg" alt="">
+      <img class="modal-slide" src="foto/nonton1.jpeg" alt="">
+      <img class="modal-slide" src="foto/konser.jpeg" alt="">
+      <img class="modal-slide" src="foto/konser2.jpeg" alt="">
+      <img class="modal-slide" src="foto/konser3.jpeg" alt="">
+      <img class="modal-slide" src="foto/kado.jpeg" alt="">
+      <img class="modal-slide" src="foto/mangan2.jpeg" alt="">
+      <img class="modal-slide" src="foto/tepian.jpeg" alt="">
+      <img class="modal-slide" src="foto/tukarkado.jpeg" alt="">
+    </div>
+    <div class="modal-body">
+      <h2>Random</h2>
+      <p>ini foto foto Random Kita yaa Sayangg wkwk,mulai dari ke Studi tour UMKT,
+        movie date,konser date,tepian date,mangan date,pokoknyaa banyak hal baru yang abang dapat
+        sama adekk sayangg,sekalii lagi terimakasihh ILOVEEUU SAYANGG .</p>
+    </div>
+  </div>
+</div>
+
+<!-- Confetti lib -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+<script>
+/* ====== MUSIC AUTOPLAY + TOGGLE ====== */
+const audio = document.getElementById('bgMusic');
+const musicBtn = document.getElementById('musicBtn') || document.getElementById('musicBtn');
+const musicIcon = document.getElementById('musicIcon');
+let isPlaying = false;
+
+window.addEventListener('load', () => {
+  // confetti on load
+  fireConfetti();
+
+  // autoplay trick with small timeout
+  setTimeout(() => {
+    audio.play().then(() => { isPlaying = true; }).catch(()=>{ /* blocked */ });
+  }, 300);
+});
+
+// fallback: play after first interaction
+document.addEventListener('click', function oncePlay(){
+  if(!isPlaying){
+    audio.play().then(()=>{ isPlaying = true; });
+  }
+  // do not remove listener; keep it for safety
+});
+
+// toggle music
+document.getElementById('musicBtn').addEventListener('click', () => {
+  if(isPlaying){
+    audio.pause();
+    musicIcon.className = 'fas fa-volume-mute';
+  } else {
+    audio.play().catch(()=>{});
+    musicIcon.className = 'fas fa-volume-up';
+  }
+  isPlaying = !isPlaying;
+});
+
+/* ====== CONFETTI ====== */
+function fireConfetti(){
+  const duration = 1600;
+  const end = Date.now() + duration;
+  (function frame(){
+    confetti({ particleCount:5, angle:60, spread:55, origin:{ x:0 } });
+    confetti({ particleCount:5, angle:120, spread:55, origin:{ x:1 } });
+    if(Date.now() < end) requestAnimationFrame(frame);
+  }());
+}
+
+/* ====== POPUP HANDLING ====== */
+/* open by data-popup attribute */
+document.querySelectorAll('.polaroid').forEach(el=>{
+  el.addEventListener('click', () => {
+    const id = el.getAttribute('data-popup');
+    if(!id) return;
+    const modal = document.getElementById('modal-' + id);
+    if(modal){
+      modal.classList.add('show');
+      modal.setAttribute('aria-hidden','false');
+    }
+  });
+});
+
+/* close buttons */
+document.querySelectorAll('.modal-close').forEach(btn=>{
+  btn.addEventListener('click', () => {
+    const target = btn.getAttribute('data-close');
+    const modal = document.getElementById('modal-' + target);
+    if(modal){ modal.classList.remove('show'); modal.setAttribute('aria-hidden','true'); }
+  });
+});
+
+/* close when click outside modal-card */
+document.querySelectorAll('.modal').forEach(modal=>{
+  modal.addEventListener('click', (ev) => {
+    if(ev.target === modal){
+      modal.classList.remove('show');
+      modal.setAttribute('aria-hidden','true');
+    }
+  });
+});
+
+/* ====== SLIDERS for each modal (independent intervals) ====== */
+function initModalSlider(name, interval = 3000){
+  const sliderContainer = document.querySelector('[data-slider="'+name+'"]');
+  if(!sliderContainer) return;
+  const slides = sliderContainer.querySelectorAll('.modal-slide');
+  if(slides.length <= 1) return;
+  let idx = 0;
+  // next function
+  function next(){
+    slides.forEach(s => s.classList.remove('active'));
+    idx = (idx + 1) % slides.length;
+    slides[idx].classList.add('active');
+  }
+  // run interval
+  setInterval(next, interval);
+}
+
+// initialize all sliders with reasonable intervals (slower for photobox because more images)
+initModalSlider('first',2000);
+initModalSlider('photobox',2000);
+initModalSlider('aniv',1800);
+initModalSlider('kopken',2200);
+initModalSlider('nyore',2200);
+initModalSlider('random',2000)
+
+/* Accessibility: close modal by Escape */
+document.addEventListener('keydown', (e)=>{
+  if(e.key === 'Escape'){
+    document.querySelectorAll('.modal.show').forEach(m=>{ m.classList.remove('show'); m.setAttribute('aria-hidden','true'); });
+  }
+});
+</script>
+
+</body>
+</html>
